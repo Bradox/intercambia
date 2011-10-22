@@ -1,6 +1,7 @@
 package org.socialnetwork.db.beans;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,13 +27,42 @@ public class Project
 	     	   joinColumns = { @JoinColumn(name = "PROJECT_ID") }, 
 	 		   inverseJoinColumns = { @JoinColumn(name = "IMAGE_ID") })
 	private List<Image> images;
-	private List<Comment> coments;
 	@Column(name="DETAIL", columnDefinition="TEXT")
 	private String detail;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "PROJECT_COMMENT", 
-	 			joinColumns = { @JoinColumn(name = "PROJECT_ID") }, 
-	 			inverseJoinColumns = { @JoinColumn(name = "COMMENT_ID") })
-	private List<Comment> comments;
+	@OneToMany(mappedBy="project")
+	private List<Comment> comments;	
+	
+	
+	public Project(Long id, List<Image> images, String detail,List<Comment> comments) {
+		super();
+		this.id = id;
+		this.images = images;
+		this.detail = detail;
+		this.comments = comments;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public List<Image> getImages() {
+		return images;
+	}
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 	
 }

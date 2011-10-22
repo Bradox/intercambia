@@ -48,6 +48,16 @@ public class User
 	 private Image picture;
 	 @OneToOne(cascade = CascadeType.ALL)
 	 private Comment comment;
+	 @OneToMany(cascade = CascadeType.ALL)
+	 @JoinTable(name = "USER_MAILS_TO", 
+	 			joinColumns = { @JoinColumn(name = "USER_TO_ID") }, 
+	 			inverseJoinColumns = { @JoinColumn(name = "MAIL_TO_ID") })
+	 private List<Mail> mailsTo;
+	/* @OneToMany(cascade = CascadeType.ALL)
+	 @JoinTable(name = "USER_MAIL_FROM", 
+	 			joinColumns = { @JoinColumn(name = "USER_FROM_ID") }, 
+	 			inverseJoinColumns = { @JoinColumn(name = "MAIL_FROM_ID") })
+	 private List<Mail> mailsFrom;*/
 	 
 	 public User(Long id, String nickName, String name, String lastName,Municipality location, List<Project> projectsSupplied, List<Project> projectsOffered,String skills, String portafolio, String bio, Image picture, Comment comment) 
 	 {
@@ -161,4 +171,19 @@ public class User
 	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
+
+	public List<Mail> getMailsTo() {
+		return mailsTo;
+	}
+
+	public void setMailsTo(List<Mail> mailsTo) {
+		this.mailsTo = mailsTo;
+	}
+	/*public List<Mail> getMailsFrom() {
+		return mailsFrom;
+	}
+	public void setMailsFrom(List<Mail> mailsFrom) {
+		this.mailsFrom = mailsFrom;
+	}*/
+
 }

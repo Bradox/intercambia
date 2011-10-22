@@ -15,7 +15,7 @@
   <dependencies>
     <dependency>
 	        <groupId>${spring.group}</groupId>
-	        <artifactId>orm</artifactId>
+	        <artifactId>spring-orm</artifactId>
 	        <version>${spring.version}</version>
     </dependency>
             <dependency>
@@ -66,6 +66,12 @@
       		<type>jar</type>
       		<scope>test</scope>
       		<optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+	  <artifactId>mockito-all</artifactId>
+  	  <version>1.9.0-rc1</version>
+ 	  <scope>test</scope>
     </dependency>
   </dependencies>
 

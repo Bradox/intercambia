@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +22,7 @@ public class Municipality
 	private Long id;
 	@Column(name="name", nullable=false)
 	private String name;
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "PROVINCE_MUNICIPALITY", 
 	 			joinColumns = { @JoinColumn(name = "PROVINCE_ID") }, 
 	 			inverseJoinColumns = { @JoinColumn(name = "MUNICIPALITY_ID") })
