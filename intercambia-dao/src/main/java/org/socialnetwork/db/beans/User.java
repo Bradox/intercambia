@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,7 +29,8 @@ public class User
 	 private String name;
 	 @Column(name="LASTNAME", nullable=false)
 	 private String lastName;
-	 @OneToOne
+	 @ManyToOne(cascade=CascadeType.ALL)
+	 @JoinColumn(name="MUNICIPALITY_ID")
 	 private Municipality location;
 	 @OneToMany(cascade = CascadeType.ALL)
 	 @JoinTable(name = "USER_PROJECT_SUPPLIED", 
@@ -46,20 +48,22 @@ public class User
 	 private String bio;
 	 @OneToOne(cascade = CascadeType.ALL)
 	 private Image picture;
-	 @OneToOne(cascade = CascadeType.ALL)
-	 private Comment comment;
 	 @OneToMany(cascade = CascadeType.ALL)
-	 @JoinTable(name = "USER_MAILS_TO", 
-	 			joinColumns = { @JoinColumn(name = "USER_TO_ID") }, 
-	 			inverseJoinColumns = { @JoinColumn(name = "MAIL_TO_ID") })
-	 private List<Mail> mailsTo;
-	/* @OneToMany(cascade = CascadeType.ALL)
-	 @JoinTable(name = "USER_MAIL_FROM", 
-	 			joinColumns = { @JoinColumn(name = "USER_FROM_ID") }, 
-	 			inverseJoinColumns = { @JoinColumn(name = "MAIL_FROM_ID") })
-	 private List<Mail> mailsFrom;*/
+	 @JoinTable(name = "USER_COMMENT", 
+	 			joinColumns = { @JoinColumn(name = "USER_ID") }, 
+	 			inverseJoinColumns = { @JoinColumn(name = "COMMENT_ID") })
+	 private List<Comment> comment;
+     @OneToMany (mappedBy="userTo")
+     private List<Mail> MailsTo;
+     @OneToMany(mappedBy="userFrom")
+     private List<Mail> MailsFrom;
 	 
-	 public User(Long id, String nickName, String name, String lastName,Municipality location, List<Project> projectsSupplied, List<Project> projectsOffered,String skills, String portafolio, String bio, Image picture, Comment comment) 
+     public User()
+     {
+    	 
+     }
+     
+	 public User(Long id, String nickName, String name, String lastName,Municipality location, List<Project> projectsSupplied, List<Project> projectsOffered,String skills, String portafolio, String bio, Image picture, List<Comment> comment) 
 	 {
 		super();
 		this.id = id;
@@ -164,26 +168,11 @@ public class User
 		this.projectsSupplied = projectsSupplied;
 	}
 
-	public Comment getComment() {
+	public List<Comment> getComment() {
 		return comment;
 	}
 
-	public void setComment(Comment comment) {
+	public void setComment(List<Comment> comment) {
 		this.comment = comment;
 	}
-
-	public List<Mail> getMailsTo() {
-		return mailsTo;
-	}
-
-	public void setMailsTo(List<Mail> mailsTo) {
-		this.mailsTo = mailsTo;
-	}
-	/*public List<Mail> getMailsFrom() {
-		return mailsFrom;
-	}
-	public void setMailsFrom(List<Mail> mailsFrom) {
-		this.mailsFrom = mailsFrom;
-	}*/
-
 }

@@ -1,7 +1,5 @@
 package org.socialnetwork.db.beans;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,8 +26,8 @@ public class Comment
 	 private String title;
      @ManyToOne (cascade = CascadeType.ALL)
  	 @JoinTable(name = "PROJECT_COMMENT", 
-		joinColumns = { @JoinColumn(name = "PROJECT_ID") }, 
-		inverseJoinColumns = { @JoinColumn(name = "COMMENT_ID") })
+		joinColumns = { @JoinColumn(name = "COMMENT_ID") }, 
+		inverseJoinColumns = { @JoinColumn(name = "PROJECT_ID") })
 	 private Project project;
 	 
 	 public Comment(Long id, String comment, String title, Project project) 

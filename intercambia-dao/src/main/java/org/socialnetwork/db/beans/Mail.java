@@ -1,10 +1,14 @@
 package org.socialnetwork.db.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,10 +20,16 @@ public class Mail
 	 @GeneratedValue(strategy = GenerationType.AUTO)
 	 @Column(name = "ID", updatable = false, nullable = false)
 	 private Long id;
-	 @OneToMany(mappedBy="mailsTo")
+	 @ManyToOne(cascade = CascadeType.ALL)
+ 	 @JoinTable(name = "USER_MAIL_TO", 
+		joinColumns = { @JoinColumn(name = "MAIL_ID") }, 
+		inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
 	 private User userTo;
-	// @OneToMany(mappedBy="mailsFrom")
-	// private User userFrom;
+	 @ManyToOne(cascade=CascadeType.ALL)
+		@JoinTable(name = "USER_MAIL_FROM", 
+		joinColumns = { @JoinColumn(name = "MAIL_ID") }, 
+		inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
+	 private User userFrom;
 	 @Column(name="SUBJECT")
 	 private String subject;
 	 @Column(name="BIO", columnDefinition="CONTENT")

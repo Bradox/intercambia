@@ -5,8 +5,16 @@
 <hibernate-configuration>
   <session-factory>
     <property name="show_sql">true</property>
-	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+	<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 	<property name="hibernate.hbm2ddl.auto">update</property>
+	<property name="hibernate.current_session_context_class">thread</property>
+    <mapping class="org.socialnetwork.db.beans.User"/>
+    <mapping class="org.socialnetwork.db.beans.Municipality"/>
+    <mapping class="org.socialnetwork.db.beans.Image"/>
+    <mapping class="org.socialnetwork.db.beans.Mail"/>
+    <mapping class="org.socialnetwork.db.beans.Comment"/>
+    <mapping class="org.socialnetwork.db.beans.Project"/>
+    <mapping class="org.socialnetwork.db.beans.Province"/>
     <mapping class="org.socialnetwork.db.beans.User"/>
   </session-factory>
 </hibernate-configuration>

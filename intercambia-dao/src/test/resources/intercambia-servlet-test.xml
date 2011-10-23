@@ -6,6 +6,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- Configures Hibernate - Database Config -->
+	<context:annotation-config />
+	<context:component-scan base-package="org.socialnetwork.db.dao.impl" />
+	
+	
 	<import resource="db-config-test.xml" />
 
 </beans>
